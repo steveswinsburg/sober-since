@@ -1,5 +1,7 @@
 # sober-since
-An app created to help you stay sober. I created this app to help my mate who was struggling with alcohol addiction. I hope it works for you too! ❤️
+An app created to help you stay sober. 
+
+I created this app to help my mate who was struggling with alcohol addiction. I hope it works for you too! ❤️
 
 Run online via https://sober-since.vercel.app/ or scan the QR code:
 
