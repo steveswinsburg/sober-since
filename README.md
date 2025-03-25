@@ -2,6 +2,9 @@
 An app created to help you stay sober
 
 ## Running locally
+
+Requires Node 20+
+
 ```
 npm install
 npm start
