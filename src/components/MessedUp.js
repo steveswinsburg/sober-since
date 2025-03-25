@@ -15,7 +15,6 @@ function MessedUp() {
     <>
       <Button
         variant="outline-danger"
-        className="position-fixed bottom-0 start-0 m-3"
         onClick={() => setShow(true)}
       >
         I messed up

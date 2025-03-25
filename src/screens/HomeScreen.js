@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Container, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Gear } from "react-bootstrap-icons";
+
 import Header from "../components/Header";
 import DaysSoberCard from "../components/DaysSoberCard";
 import MilestoneBanner from "../components/MilestoneBanner";
-import MessedUp from "../components/MessedUp";
+import Footer from "../components/Footer";
+
 import { getStartDate, calculateDaysSober, getMilestoneMessage } from "../utils/appUtils";
+
 
 function HomeScreen() {
   const navigate = useNavigate();
   const [startDate, setStartDateState] = useState(null);
   const [daysSober, setDaysSober] = useState(null);
   const [milestone, setMilestone] = useState(null);
-
+  
   useEffect(() => {
     const savedDate = getStartDate();
     if (savedDate) {
@@ -43,8 +46,7 @@ function HomeScreen() {
           <MilestoneBanner milestone={milestone} />
         </>
       )}
-
-      <MessedUp />
+      <Footer />
     </Container>
   );
 }
