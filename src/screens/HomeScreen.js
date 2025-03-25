@@ -4,27 +4,29 @@ import { useNavigate } from "react-router-dom";
 import { Gear } from "react-bootstrap-icons";
 import Header from "../components/Header";
 import DaysSoberCard from "../components/DaysSoberCard";
+import MilestoneBanner from "../components/MilestoneBanner";
+import MessedUp from "../components/MessedUp";
+import { getStartDate, calculateDaysSober, getMilestoneMessage } from "../utils/appUtils";
 
 function HomeScreen() {
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(null);
+  const [startDate, setStartDateState] = useState(null);
   const [daysSober, setDaysSober] = useState(null);
+  const [milestone, setMilestone] = useState(null);
 
   useEffect(() => {
-    const savedDate = localStorage.getItem("sinceDate");
-    setStartDate(savedDate);
-
+    const savedDate = getStartDate();
     if (savedDate) {
-      const start = new Date(savedDate);
-      const today = new Date();
-      const diffTime = today - start;
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      setDaysSober(diffDays);
+      setStartDateState(savedDate);
+      const days = calculateDaysSober(savedDate);
+      setDaysSober(days);
+      const milestoneMsg = getMilestoneMessage(days);
+      if (milestoneMsg) setMilestone(milestoneMsg);
     }
   }, []);
 
   return (
-    <Container className="mt-4 text-center">
+    <Container className="mt-4 text-center position-relative">
       <Header title="Sober Since">
         <Button variant="link" onClick={() => navigate("/config")}>
           <Gear size={24} />
@@ -36,8 +38,13 @@ function HomeScreen() {
           Welcome to <strong>Sober Since</strong>! Click the <Gear /> icon to get started.
         </Alert>
       ) : (
-        <DaysSoberCard days={daysSober} />
+        <>
+          <DaysSoberCard days={daysSober} />
+          <MilestoneBanner milestone={milestone} />
+        </>
       )}
+
+      <MessedUp />
     </Container>
   );
 }
