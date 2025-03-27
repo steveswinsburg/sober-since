@@ -1,6 +1,10 @@
 export const getTodaysDate = () => {
-    return new Date().toISOString().split("T")[0];
-};
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
 export const setStartDate = (dateStr) => {
     localStorage.setItem("sinceDate", dateStr);
@@ -12,8 +16,13 @@ export const getStartDate = () => {
 
 export const calculateDaysSober = (dateStr) => {
     const start = new Date(dateStr);
-    const today = new Date();
-    const diffTime = today - start;
+    const now = new Date();
+  
+    // Normalize both to start of their respective days
+    const startDay = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  
+    const diffTime = today - startDay;
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
 };
 
