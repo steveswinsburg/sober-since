@@ -16,7 +16,7 @@ function HomeScreen() {
   const navigate = useNavigate();
   const [startDate, setStartDateState] = useState(null);
   const [daysSober, setDaysSoberState] = useState(null);
-  const [milestone, setMilestoneState] = useState(null);
+  const [milestoneMessage, setMilestoneMessageState] = useState(null);
   
   useEffect(() => {
     const savedDateStr = getStartDate();
@@ -27,8 +27,8 @@ function HomeScreen() {
       const days = calculateDaysSober(savedDate);
       setDaysSoberState(days);
 
-      const milestoneMsg = getMilestoneMessage(days);
-      if (milestoneMsg) setMilestoneState(milestoneMsg);
+      const milestoneMessage = getMilestoneMessage(days);
+      if (milestoneMessage) setMilestoneMessageState(milestoneMessage);
     }
   }, []);
 
@@ -47,7 +47,7 @@ function HomeScreen() {
       ) : (
         <>
           <DaysSoberCard days={daysSober} />
-          <MilestoneBanner milestone={milestone} />
+          <MilestoneBanner milestoneMessage={milestoneMessage} />
           <MilestoneStampCard daysSober={daysSober} startDate={startDate} />
         </>
       )}
