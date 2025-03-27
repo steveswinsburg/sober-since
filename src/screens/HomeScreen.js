@@ -15,17 +15,20 @@ import { getStartDate, calculateDaysSober, getMilestoneMessage } from "../utils/
 function HomeScreen() {
   const navigate = useNavigate();
   const [startDate, setStartDateState] = useState(null);
-  const [daysSober, setDaysSober] = useState(null);
-  const [milestone, setMilestone] = useState(null);
+  const [daysSober, setDaysSoberState] = useState(null);
+  const [milestone, setMilestoneState] = useState(null);
   
   useEffect(() => {
-    const savedDate = getStartDate();
-    if (savedDate) {
+    const savedDateStr = getStartDate();
+    if (savedDateStr) {
+      const savedDate = new Date(savedDateStr);
       setStartDateState(savedDate);
+
       const days = calculateDaysSober(savedDate);
-      setDaysSober(days);
+      setDaysSoberState(days);
+
       const milestoneMsg = getMilestoneMessage(days);
-      if (milestoneMsg) setMilestone(milestoneMsg);
+      if (milestoneMsg) setMilestoneState(milestoneMsg);
     }
   }, []);
 
@@ -45,7 +48,7 @@ function HomeScreen() {
         <>
           <DaysSoberCard days={daysSober} />
           <MilestoneBanner milestone={milestone} />
-          <MilestoneStampCard daysSober={daysSober} />
+          <MilestoneStampCard daysSober={daysSober} startDate={startDate} />
         </>
       )}
       <Footer />
