@@ -3,12 +3,12 @@ import { Alert } from "react-bootstrap";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@react-hook/window-size";
 
-function MilestoneBanner({ milestone }) {
+function MilestoneBanner({ milestoneMessage }) {
   const [visible, setVisible] = useState(false);
   const [width, height] = useWindowSize();
 
   useEffect(() => {
-    if (milestone) {
+    if (milestoneMessage) {
       setVisible(true);
 
       const timer = setTimeout(() => {
@@ -17,9 +17,9 @@ function MilestoneBanner({ milestone }) {
 
       return () => clearTimeout(timer);
     }
-  }, [milestone]);
+  }, [milestoneMessage]);
 
-  if (!milestone) return null;
+  if (!milestoneMessage) return null;
 
   return (
     <>
@@ -40,7 +40,7 @@ function MilestoneBanner({ milestone }) {
       </div>
 
       <Alert variant="success" className="mt-4">
-        🎊 <strong>{milestone}</strong>
+        🎊 <strong>{milestoneMessage}</strong>
       </Alert>
     </>
   );

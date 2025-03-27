@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import DaysSoberCard from "../components/DaysSoberCard";
 import MilestoneBanner from "../components/MilestoneBanner";
 import Footer from "../components/Footer";
+import MilestoneStampCard from "../components/MilestoneStampCard";
 
 import { getStartDate, calculateDaysSober, getMilestoneMessage } from "../utils/appUtils";
 
@@ -44,6 +45,7 @@ function HomeScreen() {
         <>
           <DaysSoberCard days={daysSober} />
           <MilestoneBanner milestone={milestone} />
+          <MilestoneStampCard daysSober={daysSober} />
         </>
       )}
       <Footer />
